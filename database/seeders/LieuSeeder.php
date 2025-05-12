@@ -21,7 +21,7 @@ class LieuSeeder extends Seeder
         foreach ($lieux as $lieu) {
             Lieu::create([
                 'nom' => $lieu['nom'],
-                'user_id_creation' => 5,
+                'user_id_creation' => 1,
             ]);
         }
     }

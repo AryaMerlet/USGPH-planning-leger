@@ -17,36 +17,36 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user = User::firstOrCreate([
-            'first_name' => 'Erwan',
-            'last_name' => 'Baron',
-            'email' => 'erwan.baron@usgph.com',
+            'first_name' => 'Martin',
+            'last_name' => 'Dupont',
+            'email' => 'martin.dupont@usgph.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
         Bouncer::assign('salarie')->to($user);
 
         $user2 = User::firstOrCreate([
-            'first_name' => 'Jimmy',
-            'last_name' => 'Dorbais',
-            'email' => 'jimmy.dorbais@usgph.com',
+            'first_name' => 'Lucas',
+            'last_name' => 'Leroy',
+            'email' => 'lucas.leroy@usgph.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
         Bouncer::assign('salarie')->to($user2);
 
         $user3 = User::firstOrCreate([
-            'first_name' => 'Nathan',
-            'last_name' => 'Richard',
-            'email' => 'nathan.richard@usgph.com',
+            'first_name' => 'Alexandre',
+            'last_name' => 'Moreau',
+            'email' => 'alexandre.moreau@usgph.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
         Bouncer::assign('salarie')->to($user3);
 
         $admin = User::firstOrCreate([
-            'first_name' => 'test',
+            'first_name' => 'admin',
             'last_name' => 'admin',
-            'email' => 'testadmin@usgph.com',
+            'email' => 'admin.admin@usgph.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
