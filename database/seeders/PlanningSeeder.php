@@ -24,7 +24,7 @@ class PlanningSeeder extends Seeder
 
         $endDate = Carbon::now()->subWeek()->endOfWeek();
         $startDate = Carbon::now()->subYear()->subWeek()->startOfWeek();
-        $users = [2, 3, 4];
+        $users = [1, 2, 3];
 
         $tasksByUserAndDay = $this->preloadTasks($users);
 
