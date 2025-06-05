@@ -10,7 +10,7 @@ class TacheSeeder extends Seeder
 {
     public function run()
     {
-        $users = [2, 3, 4];
+        $users = [1, 2, 3];
 
         $taches = [
             [
