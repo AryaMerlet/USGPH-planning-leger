@@ -8,6 +8,8 @@ use App\Http\Services\Planning\PlanningService;
 use App\Http\Services\Planning\TacheService;
 use App\Models\Planning\Planning;
 use App\Models\Planning\Tache;
+use App\Models\Planning\Materiel;
+use App\Models\Planning\QuantiteMateriel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -440,5 +442,19 @@ class TacheTest extends TestCase
         $response->assertJson([
             'message' => "Vous n'avez pas les droits nécessaires pour cette action"
         ]);
+    }
+
+    
+    public function test_store_with_materiel()
+    {
+        $this->setUser('admin');
+
+        $tache = Quantitemateriel::factory()->create();
+
+        $data = array_merge($tache->toArray());
+
+        $response = $this->post(route(self::MODEL . '.store'), $data);
+
+        $response->assertSessionHas('ok');
     }
 }
