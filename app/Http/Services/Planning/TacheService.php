@@ -3,6 +3,7 @@
 namespace App\Http\Services\Planning;
 
 use App\Http\Repositories\Planning\TacheRepository;
+use App\Http\Repositories\Planning\QuantiteMaterielRepository;
 use App\Models\Planning\Tache;
 use App\Models\User;
 use Illuminate\Support\Collection;
@@ -20,14 +21,25 @@ class TacheService
     protected $planningService;
 
     /**
+     * @var QuantiteMaterielRepository
+     */
+    protected $quantiteMaterielRepository;
+
+    /**
      * Constructor
      *
      * @param  TacheRepository  $repository
+     * @param  PlanningService  $planningService
+     * @param  QuantiteMaterielRepository  $quantiteMaterielRepository
      */
-    public function __construct(TacheRepository $repository, PlanningService $planningService)
-    {
+    public function __construct(
+        TacheRepository $repository, 
+        PlanningService $planningService,
+        QuantiteMaterielRepository $quantiteMaterielRepository
+    ) {
         $this->repository = $repository;
         $this->planningService = $planningService;
+        $this->quantiteMaterielRepository = $quantiteMaterielRepository;
     }
 
     /**
@@ -43,7 +55,18 @@ class TacheService
 
         // $inputs = $this->planningService->handleOverlappingPlans($inputs);
 
-        return $this->repository->store($inputs);
+       $tache = $this->repository->store($inputs);   
+        if (isset($inputs['materiels']) && is_array($inputs['materiels'])) {
+            foreach ($inputs['materiels'] as $materiel) {
+                $materielData = [
+                    'id_tache' => $tache->id,
+                    'id_materiel' => $materiel['id_materiel'],
+                    'quantite' => $materiel['quantite']
+                ];
+                $this->quantiteMaterielRepository->store($materielData);
+            }
+        }
+        return $tache;
     }
 
     /**
