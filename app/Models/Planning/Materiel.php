@@ -2,55 +2,52 @@
 
 namespace App\Models\Planning;
 
-use App\Models\User;
 use App\Traits\LogAction;
 use App\Traits\WhoActs;
-use Database\Factories\Planning\TacheFactory;
+use Database\Factories\Planning\MaterielFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  *
  *
  * @property int $id
- * @property string $nom
- * @property int|null $user_id
+ * @property string $nom_materiel
  * @property \Illuminate\Support\Carbon $created_at
  * @property int $user_id_creation
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $user_id_modification
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property int|null $user_id_suppression
- * @property int $categorie_id
- * @property-read \App\Models\Planning\Categorie $categorie
  * @property-read string $actions
- * @property-read User|null $user
- * @property-read User $userCreation
- * @property-read User|null $userModification
- * @property-read User|null $userSuppression
- * @method static \Database\Factories\Planning\TacheFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereNom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereUserIdCreation($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereUserIdModification($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache whereUserIdSuppression($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Tache withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, QuantiteMateriel> $quantiteMateriels
+ * @property-read int|null $quantite_materiels_count
+ * @property-read \App\Models\User $userCreation
+ * @property-read \App\Models\User|null $userModification
+ * @property-read \App\Models\User|null $userSuppression
+ * @method static \Database\Factories\Planning\MaterielFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereNomMateriel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereUserIdCreation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereUserIdModification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel whereUserIdSuppression($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Materiel withoutTrashed()
  * @mixin \Eloquent
  */
-class Tache extends Model
+class Materiel extends Model
 {
     /**
-     * @use HasFactory<TacheFactory>
+     * @use HasFactory<MaterielFactory>
      */
     use HasFactory;
 
@@ -76,9 +73,9 @@ class Tache extends Model
         return '';
     }
     
-    /** @return BelongsTo<QuantiteMateriel, $this> */
-    public function quantiteMateriels(): BelongsTo
+    /** @return HasMany<QuantiteMateriel, $this> */
+    public function quantiteMateriels(): HasMany
     {
-        return $this->belongsTo(QuantiteMateriel::class);
+        return $this->hasMany(QuantiteMateriel::class);
     }
 }
