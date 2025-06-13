@@ -59,6 +59,7 @@ class DatabaseSeeder extends Seeder
             PlanningSeeder::class,
             ArchiveSeeder::class,
             MotifSeeder::class,
+            MaterielSeeder::class,
         ]);
     }
 }
