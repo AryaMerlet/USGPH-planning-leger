@@ -22,7 +22,7 @@ return new class extends Migration
 
         $schema->create('quantite_materiels', function (ExtendBlueprint $table) {
             $table->id();
-            $table->int('quantite');
+            $table->integer('quantite');
             $table->foreignIdFor(Tache::class);
             $table->foreignIdFor(Materiel::class);
             $table->whoAndWhen();
