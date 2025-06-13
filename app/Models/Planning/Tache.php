@@ -111,9 +111,9 @@ class Tache extends Model
         return $this->belongsTo(Categorie::class);
     }
     
-    /** @return BelongsTo<QuantiteMateriel, $this> */
-    public function categorie(): BelongsTo
+   /** @return HasMany<QuantiteMateriel, $this> */
+    public function quantiteMateriels(): HasMany
     {
-        return $this->belongsTo(QuantiteMateriel::class);
+        return $this->hasMany(QuantiteMateriel::class);
     }
 }

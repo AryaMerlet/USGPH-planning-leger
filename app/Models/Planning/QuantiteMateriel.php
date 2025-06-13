@@ -79,13 +79,13 @@ class Tache extends Model
     }
     
     /** @return HasMany<Materiel, $this> */
-    public function categorie(): HasMany
+    public function materiels(): HasMany
     {
         return $this->belongsTo(Materiel::class);
     }
 
     /** @return HasMany<Tache, $this> */
-    public function categorie(): HasMany
+    public function taches(): HasMany
     {
         return $this->belongsTo(Tache::class);
     }
